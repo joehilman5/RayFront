@@ -1,0 +1,10 @@
+{
+    "5": {
+        "rayCoin" : {
+            "address": "0xF41BDD3F0EaBd3ba1D59AE1c9f550C5FAB9B2e98"
+        },
+        "rayCoinPool": {
+            "address" : "0x8c2173805E0Ebb4f57C8E2615DE7092D043aA648"
+        }
+    }
+}
