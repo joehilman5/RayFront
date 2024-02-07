@@ -17,7 +17,6 @@ function BuyRay({account, rayCoin, rayCoinPool, provider}) {
     
             if(!isNaN(amount) && amount >= 1) {
                 let cost = amount * await rayCoinPool.price();
-                console.log(cost);
                 let action = await rayCoinPool.connect(signer).buyRayCoin({value: BigInt(cost)});
                 await action.wait();
             } else {

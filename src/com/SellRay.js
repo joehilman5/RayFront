@@ -1,5 +1,4 @@
 import '../App.css';
-import {ethers} from 'ethers';
 import {useRef} from 'react';
 
 /* global BigInt */
@@ -18,7 +17,7 @@ function SellRay({account, rayCoin, rayCoinPool, provider}) {
             if(!isNaN(amount) && amount >= 1) {
                 
                 let adjust_amount = amount.concat('000000000000000000');
-                //let adjust_amount = amount.toString();
+                
                 console.log(adjust_amount);
 
                 let action = await rayCoin.connect(signer).approve(rayCoinPool.address, BigInt(adjust_amount));
