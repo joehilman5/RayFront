@@ -50,8 +50,10 @@ function App() {
     })
 
     rayCoin.on('Transfer', async (from, to) => {
-      let rayBalance = await rayCoin.balanceOf(to) / (10 ** 18);
-      setRayBalance(rayBalance);
+      //let rayBalance = await rayCoin.balanceOf(to) / (10 ** 18);
+      let rayBalance = await rayCoin.balanceOf(to);
+      let formatBalance = ethers.utils.formatUnits(rayBalance, 18);
+      setRayBalance(formatBalance);
     })
 
   };
