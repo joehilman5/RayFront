@@ -1,10 +1,9 @@
 import '../App.css';
-import {ethers} from 'ethers';
 import {useRef} from 'react';
 
 /* global BigInt */
 
-function BuyRay({account, rayCoin, rayCoinPool, provider}) {
+function BuyRay({rayCoinPool, provider}) {
 
     const buyRef = useRef();
 

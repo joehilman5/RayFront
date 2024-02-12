@@ -4,12 +4,19 @@ import {ethers} from 'ethers';
 function Navigation({account, setAccount, rayCoin, setRayBalance}) {
 
     const connectHandler = async () => {
-        const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
-        const account = ethers.utils.getAddress(accounts[0]);
-        setAccount(account);
 
-        let rayBalance = await rayCoin.balanceOf(account) / (10 ** 18);
-        setRayBalance(rayBalance);
+        try {
+            const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+            const account = ethers.utils.getAddress(accounts[0]);
+            setAccount(account);
+    
+            let rayBalance = await rayCoin.balanceOf(account);
+            let formatBalance = ethers.utils.formatUnits(rayBalance, 18);
+            setRayBalance(formatBalance);
+        } catch(e) {
+            console.error(e);
+        }
+       
     }
 
   return (

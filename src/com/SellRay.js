@@ -3,7 +3,7 @@ import {useRef} from 'react';
 
 /* global BigInt */
 
-function SellRay({account, rayCoin, rayCoinPool, provider}) {
+function SellRay({rayCoin, rayCoinPool, provider}) {
 
     const sellRef = useRef();
 
@@ -17,8 +17,6 @@ function SellRay({account, rayCoin, rayCoinPool, provider}) {
             if(!isNaN(amount) && amount >= 1) {
                 
                 let adjust_amount = amount.concat('000000000000000000');
-                
-                console.log(adjust_amount);
 
                 let action = await rayCoin.connect(signer).approve(rayCoinPool.address, BigInt(adjust_amount));
                 await action.wait();
@@ -27,6 +25,7 @@ function SellRay({account, rayCoin, rayCoinPool, provider}) {
                 await action.wait();
 
             } else {
+                //Error Page for Wrong Input
                 console.log('Input proper value');
             }
         }catch(err) {

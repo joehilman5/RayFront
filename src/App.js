@@ -31,26 +31,20 @@ function App() {
 
     const rayCoin = new ethers.Contract(config[network.chainId].rayCoin.address, RayCoin, provider);
     setRayCoin(rayCoin);
-    //console.log(await rayCoin.name());
 
     const rayCoinPool = new ethers.Contract(config[network.chainId].rayCoinPool.address, RayCoinPool, provider);
     setRayCoinPool(rayCoinPool);
-    //console.log(await rayCoinPool.getContractBalance() / (10 ** 18));
-
-    console.log(`Contract Balance is: ${await rayCoinPool.getContractBalance()}`);
-    
 
     window.ethereum.on('accountsChanged', async () => {
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
       const account = ethers.utils.getAddress(accounts[0]);
       setAccount(account);
 
-      let rayBalance = await rayCoin.balanceOf(account) / (10 ** 18);
+      let rayBalance = ethers.utils.formatUnits(await rayCoin.balanceOf(account), 18);
       setRayBalance(rayBalance);
     })
 
     rayCoin.on('Transfer', async (from, to) => {
-      //let rayBalance = await rayCoin.balanceOf(to) / (10 ** 18);
       let rayBalance = await rayCoin.balanceOf(to);
       let formatBalance = ethers.utils.formatUnits(rayBalance, 18);
       setRayBalance(formatBalance);
@@ -69,13 +63,17 @@ function App() {
       <h1 className='center'>Ray Coin</h1>
 
       {account ? (<div> 
-        <BuyRay account={account} rayCoin={rayCoin} rayCoinPool={rayCoinPool} provider={provider} />
+
+        {//Page when user connects to MetaMask
+        }
+        <BuyRay rayCoinPool={rayCoinPool} provider={provider} />
 
         <SellRay rayCoin={rayCoin} rayCoinPool={rayCoinPool} provider={provider} />
 
         <p className='ray_balance'>Your RayCoin Balance is: {rayBalance}</p>
         </div>
         ) : (
+          
           <div>
             <h3 className='meta'>Connect Your MetaMask!!</h3>
           </div>
