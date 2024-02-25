@@ -3,7 +3,9 @@ import { MdSwapVert } from "react-icons/md";
 import SwapField1 from "../SwapField1";
 import SwapField2 from "../SwapField2";
 
-function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider }) {
+/* global BigInt */
+
+function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider, rayBalance, rayPrice, rayPayback }) {
   const [swap, setSwap] = useState(true);
   const [formAmount, setFormAmount] = useState({
     rayAmount: "",
@@ -37,11 +39,12 @@ function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider }) {
 
       //   let amount = 0;
 
-      if (!isNaN(amount) && amount >= 1) {
-        let cost = amount * (await rayCoinPool.price());
+      if (!isNaN(amount)) {
+        //let cost = amount * (await rayCoinPool.price());
+        let amountToWei = Number(amount) * 10 ** 18;
         let action = await rayCoinPool
           .connect(signer)
-          .buyRayCoin({ value: BigInt(cost) });
+          .buyRayCoin({ value: BigInt(amountToWei) });
         await action.wait();
       } else {
         console.log("Input proper value");
@@ -61,12 +64,18 @@ function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider }) {
             disable={swap ? false : true}
             formAmount={formAmount}
             setFormAmount={setFormAmount}
+            swap={swap}
+            rayPrice={rayPrice}
+            rayPayback={rayPayback}
           />
         ) : (
           <SwapField2
             disable={swap ? true : false}
             formAmount={formAmount}
             setFormAmount={setFormAmount}
+            swap={swap}
+            rayPrice={rayPrice}
+            rayPayback={rayPayback}
           />
         )}
 
@@ -87,12 +96,18 @@ function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider }) {
               disable={swap ? true : false}
               formAmount={formAmount}
               setFormAmount={setFormAmount}
+              swap={swap}
+              rayPrice={rayPrice}
+              rayPayback={rayPayback}
             />
           ) : (
             <SwapField1
               disable={swap ? false : true}
               formAmount={formAmount}
               setFormAmount={setFormAmount}
+              swap={swap}
+              rayPrice={rayPrice}
+              rayPayback={rayPayback}
             />
           )}
         </div>
@@ -123,7 +138,7 @@ function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider }) {
         )}
       </div>
       <div className="text-gray-100 text-xl text-center mt-4">
-       <p clas>RayCoin Balance: <span className="font-bold text-white">0.00</span> </p>
+       <p clas>RayCoin Balance: <span className="font-bold text-white">{rayBalance}</span> </p>
       </div>
     </div>
   );

@@ -1,10 +1,18 @@
 {
     "5": {
         "rayCoin" : {
-            "address": "0xF41BDD3F0EaBd3ba1D59AE1c9f550C5FAB9B2e98"
+            "address": "0x046d9687Cba757955965854d8B1d38Af17409fCF"
         },
         "rayCoinPool": {
-            "address" : "0x8c2173805E0Ebb4f57C8E2615DE7092D043aA648"
+            "address" : "0xF1c43517757B6e48C57478d803F470De68214107"
+        }
+    },
+    "1": {
+        "rayCoin" : {
+            "address": "0x06521CaE634b241463A40884E57eC04164eFc465"
+        },
+        "rayCoinPool": {
+            "address" : "0x8FB187c31FCCbc286a48dca0E43Cd8D9a2bBdb0C"
         }
     }
 }

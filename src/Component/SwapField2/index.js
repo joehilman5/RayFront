@@ -1,6 +1,16 @@
 import Logo from "../../assets/logo3.png";
+import { ethers } from "ethers";
 
-const SwapField2 = ({ disable ,formAmount ,setFormAmount}) => {
+const SwapField2 = ({ disable ,formAmount ,setFormAmount, swap, rayPayback}) => {
+
+  const safeMul = (n) => {
+    if(n < 1000000000) {
+      return n;
+    } else {
+      return 0;
+    }
+  }
+
   return (
     <div
     className={`flex ${
@@ -11,17 +21,25 @@ const SwapField2 = ({ disable ,formAmount ,setFormAmount}) => {
         <div className="rounded-full bg-black px-1 py-1.5 mr-1">
           <img src={Logo} className="h-3 " />
         </div>
-        <> Ray</>
+        <> RAY</>
       </div>
       <div className="flex flex-col items-end">
-        <input
-          onChange={(e)=>{setFormAmount((state)=>({...state,rayAmount:e.target.value}))}}
+        {swap ? (
+          <input
+          onChange={(e)=>{setFormAmount((state)=>({...state,rayAmount: e.target.value}))}}
           className="bg-transparent text-white text-end focus:outline-none text-xl"
           placeholder="0.00"
           value={formAmount.rayAmount}
         />
+        ) : (
+        <input
+          onChange={(e)=>{setFormAmount((state)=>({...state,rayAmount: e.target.value, coinAmount: ethers.utils.formatUnits(safeMul(e.target.value) * rayPayback, 18)}))}}
+          className="bg-transparent text-white text-end focus:outline-none text-xl"
+          placeholder="0.00"
+          value={formAmount.rayAmount}
+        />)}
         
-        <div className="text-xs text-white">$113.05</div>
+        
       </div>
     </div>
   );

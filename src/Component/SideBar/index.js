@@ -77,7 +77,7 @@ export default function SideBar({
                 <div className="relative flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <img src={Logo} className="h-10" />
-                    <p className="text-white ml-2 font-bold">Ray Coin</p>
+                    <p className="text-white ml-2 font-bold">RaySwap</p>
                   </div>
                   {account ? (
                     <>
