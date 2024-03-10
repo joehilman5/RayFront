@@ -5,7 +5,7 @@ import SwapField2 from "../SwapField2";
 
 /* global BigInt */
 
-function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider, rayBalance, rayPrice, rayPayback }) {
+function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider, rayBalance, rayPrice, rayPayback, meta }) {
   const [swap, setSwap] = useState(true);
   const [formAmount, setFormAmount] = useState({
     rayAmount: "",
@@ -112,12 +112,24 @@ function Swap({ account, connectHandler, rayCoin, rayCoinPool, provider, rayBala
           )}
         </div>
         {!account ? (
-          <div
+          <>
+          {meta ? (
+            <div
             onClick={connectHandler}
             className="pulse rounded-xl bg-indigo-100 bg-opacity-80  font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 text-center py-3.5 tracking-wider  text-lg mt-4 cursor-pointer"
           >
             Connect Wallet
           </div>
+          ) : (
+            <div
+            
+            className="pulse rounded-xl bg-indigo-100 bg-opacity-80  font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 text-center py-3.5 tracking-wider  text-lg mt-4 cursor-pointer"
+          >
+            Add MetaMask Extension
+          </div>
+          )}
+            
+          </>
         ) : (
           <>
             <div

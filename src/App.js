@@ -69,6 +69,7 @@ function App() {
 
     let meta = window.ethereum.isMetaMask;
     setMeta(meta);
+    console.log(`Meta Hook: ${meta}`);
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
@@ -120,6 +121,7 @@ function App() {
         rayCoin={rayCoin}
         setRayBalance={setRayBalance}
         connectHandler={connectHandler}
+        meta={meta}
       />
       <div className="mt-20 flex justify-center">
         <Swap
@@ -131,6 +133,7 @@ function App() {
           rayBalance={rayBalance}
           rayPrice={rayPrice}
           rayPayback={rayPayback}
+          meta={meta}
         />
       </div>
     </div>

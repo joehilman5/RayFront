@@ -11,6 +11,7 @@ export default function SideBar({
   setAccount,
   rayCoin,
   setRayBalance,
+  meta,
 }) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -91,15 +92,27 @@ export default function SideBar({
                       </div>
                     </>
                   ) : (
+                    
                     <>
+                    {meta ? (
                       <div
+                      className="flex items-center"
+                      onClick={connectHandler}
+                    >
+                      <p className="pulse text-sm ml-2 tracking-wider text-white hover:text-white btnColor px-4 py-2 rounded-full cursor-pointer">
+                        Connect Wallet
+                      </p>
+                    </div>
+                    ) : (
+                    <div
                         className="flex items-center"
-                        onClick={connectHandler}
+                        
                       >
                         <p className="pulse text-sm ml-2 tracking-wider text-white hover:text-white btnColor px-4 py-2 rounded-full cursor-pointer">
-                          Connect Wallet
+                          Add MetaMask Extension
                         </p>
-                      </div>
+                      </div>)}
+                      
                     </>
                   )}
                 </div>

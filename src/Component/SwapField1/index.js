@@ -17,7 +17,7 @@ const SwapField1 = ({ disable ,formAmount ,setFormAmount, swap, rayPrice}) => {
 
       <div
         className=" bg-indigo-700  px-3 rounded-xl flex items-center cursor-pointer "
-        onClick={() => setWalletPopUp(true)}
+        
       >
         <div className="rounded-full bg-black px-2 py-1.5 mr-1">
           <img src={BnbImg} className="h-3 " />
